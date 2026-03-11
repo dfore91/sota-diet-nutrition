@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lose 80+ Pounds - SOTA Weight Loss Program</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300;1,9..40,400&family=DM+Serif+Display&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'sota-dark': '#111111',
+            'sota-charcoal': '#1A1A1A',
+            'sota-btn': '#16A34A',
+            'sota-btn-hover': '#15803D',
+            'sota-sage': '#D8D8D8',
+            'sota-light': '#F0F0F0',
+            'sota-cream': '#EBEBEB',
+            'sota-bg': '#F5F5F5',
+            'sota-warm': '#F0EDE8',
+            'sota-success': '#22C55E',
+          },
+          fontFamily: {
+            'display': ['Bebas Neue', 'sans-serif'],
+            'sans': ['DM Sans', 'Helvetica', 'Arial', 'sans-serif'],
+            'serif': ['DM Serif Display', 'Georgia', 'serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { -webkit-font-smoothing: antialiased; }
+    .sota-logo { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.08em; line-height: 0.85; }
+    .sota-logo-sub { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.25em; font-size: 0.38em; }
+  </style>
+</head>
+<body class="bg-white font-sans text-gray-900 antialiased">
+
+  <!-- ============ NAVIGATION ============ -->
+  <nav class="bg-white sticky top-0 z-50 border-b border-gray-100 shadow-sm">
+    <div class="max-w-[1200px] mx-auto px-6 flex items-center justify-between h-14">
+      <a href="index.html" class="text-sota-dark block leading-none">
+        <div class="flex items-baseline" style="gap: 2px;">
+          <span class="sota-logo text-[36px]">SOTA</span>
+          <span class="text-[7px] text-sota-dark" style="letter-spacing: 0.1em; font-family: 'DM Sans', sans-serif; font-weight: 400;">WEIGHT LOSS</span>
+        </div>
+        <span class="sota-logo-sub text-[12px] block text-gray-500 -mt-0.5">DIET AND NUTRITION</span>
+      </a>
+      <div class="hidden md:flex items-center gap-6 text-sm">
+        <div class="relative group">
+          <button class="text-gray-500 hover:text-gray-900 text-[13px] transition cursor-pointer flex items-center gap-1">Results <svg class="w-3 h-3 opacity-50" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg></button>
+          <div class="absolute top-full left-1/2 -translate-x-1/2 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+            <div class="bg-white rounded-xl shadow-lg border border-gray-100 py-2 min-w-[180px]">
+              <a href="index.html#results" class="block px-4 py-2 text-[13px] text-gray-600 hover:text-sota-dark hover:bg-gray-50 transition">Before & After Photos</a>
+              <a href="index.html#reviews" class="block px-4 py-2 text-[13px] text-gray-600 hover:text-sota-dark hover:bg-gray-50 transition">Reviews</a>
+            </div>
+          </div>
+        </div>
+        <div class="relative group">
+          <a href="index.html#programs" class="text-gray-500 hover:text-gray-900 text-[13px] transition cursor-pointer flex items-center gap-1">Programs <svg class="w-3 h-3 opacity-50" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg></a>
+          <div class="absolute top-full left-1/2 -translate-x-1/2 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+            <div class="bg-white rounded-xl shadow-lg border border-gray-100 py-2 min-w-[200px]">
+              <a href="weight-loss.html" class="block px-4 py-2 text-[13px] text-gray-600 hover:text-sota-dark hover:bg-gray-50 transition">Weight Loss</a>
+              <a href="diet-reset.html" class="block px-4 py-2 text-[13px] text-gray-600 hover:text-sota-dark hover:bg-gray-50 transition">Diet Reset</a>
+              <a href="nutrition-guidance.html" class="block px-4 py-2 text-[13px] text-gray-600 hover:text-sota-dark hover:bg-gray-50 transition">Nutrition Guidance</a>
+            </div>
+          </div>
+        </div>
+        <a href="index.html#method" class="text-gray-500 hover:text-gray-900 text-[13px] transition">How It Works</a>
+        <a href="index.html#coaching" class="text-gray-500 hover:text-gray-900 text-[13px] transition">Coaching</a>
+        <a href="locations.html" class="text-gray-500 hover:text-gray-900 text-[13px] transition">Locations Served</a>
+        <a href="members.html" class="text-gray-500 hover:text-gray-900 text-[13px] transition">Members</a>
+        <a href="book.html" class="bg-sota-btn text-white text-[12px] font-semibold px-5 py-2 rounded-full hover:bg-sota-btn-hover transition cursor-pointer">Free Nutritionist Call</a>
+      </div>
+      <button id="mobile-menu-btn" class="md:hidden w-8 h-8 flex items-center justify-center">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 px-6 py-4 space-y-1">
+      <div>
+        <button onclick="this.nextElementSibling.classList.toggle('hidden');this.querySelector('svg').classList.toggle('rotate-180')" class="flex items-center justify-between w-full text-gray-600 text-[14px] py-2">Results <svg class="w-3 h-3 opacity-50 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg></button>
+        <div class="hidden pl-4 space-y-1 pb-2">
+          <a href="index.html#results" class="block text-gray-500 text-[13px] py-1">Before & After Photos</a>
+          <a href="index.html#reviews" class="block text-gray-500 text-[13px] py-1">Reviews</a>
+        </div>
+      </div>
+      <div>
+        <button onclick="this.nextElementSibling.classList.toggle('hidden');this.querySelector('svg').classList.toggle('rotate-180')" class="flex items-center justify-between w-full text-gray-600 text-[14px] py-2">Programs <svg class="w-3 h-3 opacity-50 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg></button>
+        <div class="hidden pl-4 space-y-1 pb-2">
+          <a href="weight-loss.html" class="block text-gray-500 text-[13px] py-1">Weight Loss</a>
+          <a href="diet-reset.html" class="block text-gray-500 text-[13px] py-1">Diet Reset</a>
+          <a href="nutrition-guidance.html" class="block text-gray-500 text-[13px] py-1">Nutrition Guidance</a>
+        </div>
+      </div>
+      <a href="index.html#method" class="block text-gray-600 text-[14px] py-2">How It Works</a>
+      <a href="index.html#coaching" class="block text-gray-600 text-[14px] py-2">Coaching</a>
+      <a href="locations.html" class="block text-gray-600 text-[14px] py-2">Locations Served</a>
+      <a href="members.html" class="block text-gray-600 text-[14px] py-2">Members</a>
+      <a href="book.html" class="block bg-sota-btn text-white text-center text-[14px] font-semibold py-3 rounded-full hover:bg-sota-btn-hover transition mt-2">Free Nutritionist Call</a>
+    </div>
+  </nav>
+
+  <!-- ============ BREADCRUMB ============ -->
+  <div class="bg-sota-bg px-6 py-3 border-b border-gray-200">
+    <div class="max-w-[1200px] mx-auto">
+      <p class="text-[12px] text-gray-400"><a href="weight-loss.html" class="hover:text-gray-600 transition">Weight Loss</a> <span class="mx-1">/</span> <span class="text-gray-600">80+ lbs</span></p>
+    </div>
+  </div>
+
+  <!-- ============ HERO ============ -->
+  <section class="bg-sota-dark py-16 md:py-24 px-6 relative overflow-hidden">
+    <div class="absolute inset-0 opacity-[0.06]" style="background-image: radial-gradient(circle at 1px 1px, #fff 1px, transparent 0); background-size: 40px 40px;"></div>
+    <div class="relative max-w-[800px] mx-auto text-center">
+      <p class="text-[13px] text-white/40 uppercase tracking-[0.2em] mb-4">SOTA Weight Loss</p>
+      <h1 class="font-serif text-[36px] md:text-[52px] text-white leading-[1.1] mb-6">Lose 80+ Pounds</h1>
+      <p class="text-[16px] md:text-[18px] text-white/60 max-w-[560px] mx-auto leading-relaxed">Our most comprehensive coaching experience for clients ready for a life-changing transformation. Dedicated nutritionist support through every phase with a long-term strategy built for lasting success.</p>
+    </div>
+  </section>
+
+  <!-- ============ WHAT'S INCLUDED ============ -->
+  <section class="bg-white py-16 md:py-20 px-6">
+    <div class="max-w-[720px] mx-auto">
+      <h2 class="font-serif text-[28px] md:text-[36px] text-sota-dark leading-tight mb-6">What's Included</h2>
+      <p class="text-[15px] text-gray-600 leading-relaxed mb-10">Losing 80+ pounds is a marathon, not a sprint. The SOTA program is designed to support you through every milestone &mdash; from the first week through maintenance. Your nutritionist is your partner for the entire journey, adapting your plan at every stage.</p>
+    </div>
+
+    <div class="max-w-[900px] mx-auto grid md:grid-cols-2 gap-6">
+      <div class="bg-sota-bg rounded-2xl p-6 md:p-8">
+        <div class="w-12 h-12 rounded-xl bg-emerald-50 flex items-center justify-center mb-4">
+          <svg class="w-6 h-6 text-sota-btn" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"/></svg>
+        </div>
+        <h3 class="text-[17px] font-semibold text-sota-dark mb-2">Personalized Meal Plan</h3>
+        <p class="text-[14px] text-gray-500 leading-relaxed">Fully customized meal plans that evolve with your progress. Your nutritionist adjusts portions, macros, and meal timing as your body changes through each phase.</p>
+      </div>
+
+      <div class="bg-sota-bg rounded-2xl p-6 md:p-8">
+        <div class="w-12 h-12 rounded-xl bg-emerald-50 flex items-center justify-center mb-4">
+          <svg class="w-6 h-6 text-sota-btn" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg>
+        </div>
+        <h3 class="text-[17px] font-semibold text-sota-dark mb-2">Dedicated Nutritionist</h3>
+        <p class="text-[14px] text-gray-500 leading-relaxed">Your nutritionist stays with you through every phase of your journey. Weekly coaching calls, constant availability for questions, and proactive plan management.</p>
+      </div>
+
+      <div class="bg-sota-bg rounded-2xl p-6 md:p-8">
+        <div class="w-12 h-12 rounded-xl bg-emerald-50 flex items-center justify-center mb-4">
+          <svg class="w-6 h-6 text-sota-btn" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5"/></svg>
+        </div>
+        <h3 class="text-[17px] font-semibold text-sota-dark mb-2">Long-Term Coaching Strategy</h3>
+        <p class="text-[14px] text-gray-500 leading-relaxed">A multi-phase approach designed for sustained weight loss. Your plan is structured in stages so your body never adapts and you never plateau.</p>
+      </div>
+
+      <div class="bg-sota-bg rounded-2xl p-6 md:p-8">
+        <div class="w-12 h-12 rounded-xl bg-emerald-50 flex items-center justify-center mb-4">
+          <svg class="w-6 h-6 text-sota-btn" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182"/></svg>
+        </div>
+        <h3 class="text-[17px] font-semibold text-sota-dark mb-2">Maintenance Transition Plan</h3>
+        <p class="text-[14px] text-gray-500 leading-relaxed">The hardest part isn't losing the weight &mdash; it's keeping it off. Your nutritionist guides you through a structured transition from weight loss to long-term maintenance with 65+ maintenance recipes.</p>
+      </div>
+
+      <div class="bg-sota-bg rounded-2xl p-6 md:p-8">
+        <div class="w-12 h-12 rounded-xl bg-emerald-50 flex items-center justify-center mb-4">
+          <svg class="w-6 h-6 text-sota-btn" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.362 5.214A8.252 8.252 0 0112 21 8.25 8.25 0 016.038 7.048 8.287 8.287 0 009 9.6a8.983 8.983 0 013.361-6.867 8.21 8.21 0 003 2.48z"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 18a3.75 3.75 0 00.495-7.467 5.99 5.99 0 00-1.925 3.546 5.974 5.974 0 01-2.133-1A3.75 3.75 0 0012 18z"/></svg>
+        </div>
+        <h3 class="text-[17px] font-semibold text-sota-dark mb-2">Visceral Fat Elimination</h3>
+        <p class="text-[14px] text-gray-500 leading-relaxed">The SOTA Method prioritizes eliminating dangerous visceral fat first. Most clients see dramatic improvements in blood pressure, cholesterol, blood sugar, and sleep quality early in the program.</p>
+      </div>
+
+      <div class="bg-sota-bg rounded-2xl p-6 md:p-8">
+        <div class="w-12 h-12 rounded-xl bg-emerald-50 flex items-center justify-center mb-4">
+          <svg class="w-6 h-6 text-sota-btn" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        </div>
+        <h3 class="text-[17px] font-semibold text-sota-dark mb-2">No Drugs or Injections</h3>
+        <p class="text-[14px] text-gray-500 leading-relaxed">100% food-based weight loss from start to finish. No medications, no injections, no supplements. Just real food and the best nutritionist coaching in America.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WHAT TO EXPECT ============ -->
+  <section class="bg-sota-bg py-16 md:py-20 px-6">
+    <div class="max-w-[720px] mx-auto">
+      <h2 class="font-serif text-[28px] md:text-[36px] text-sota-dark leading-tight mb-10 text-center">What to Expect</h2>
+
+      <div class="space-y-6">
+        <div class="flex gap-4">
+          <div class="shrink-0 w-10 h-10 rounded-full bg-sota-btn/10 flex items-center justify-center">
+            <span class="text-[14px] font-bold text-sota-btn">1</span>
+          </div>
+          <div>
+            <h3 class="text-[16px] font-semibold text-sota-dark mb-1">Phase 1: Foundation (Month 1)</h3>
+            <p class="text-[14px] text-gray-500 leading-relaxed">Your body adapts to the SOTA Method quickly. Expect 10&ndash;20 lbs lost in the first month, with cravings disappearing and energy levels rising. Your nutritionist establishes your baseline and builds your long-term strategy.</p>
+          </div>
+        </div>
+
+        <div class="flex gap-4">
+          <div class="shrink-0 w-10 h-10 rounded-full bg-sota-btn/10 flex items-center justify-center">
+            <span class="text-[14px] font-bold text-sota-btn">2</span>
+          </div>
+          <div>
+            <h3 class="text-[16px] font-semibold text-sota-dark mb-1">Phase 2: Deep Burn (Months 2&ndash;4)</h3>
+            <p class="text-[14px] text-gray-500 leading-relaxed">Consistent, steady weight loss as your body burns through visceral fat. Health markers improve dramatically &mdash; many clients reduce or eliminate blood pressure and cholesterol medications during this phase.</p>
+          </div>
+        </div>
+
+        <div class="flex gap-4">
+          <div class="shrink-0 w-10 h-10 rounded-full bg-sota-btn/10 flex items-center justify-center">
+            <span class="text-[14px] font-bold text-sota-btn">3</span>
+          </div>
+          <div>
+            <h3 class="text-[16px] font-semibold text-sota-dark mb-1">Phase 3: Sustained Progress (Months 5&ndash;8)</h3>
+            <p class="text-[14px] text-gray-500 leading-relaxed">Your nutritionist continuously evolves your plan to maintain momentum. You're seeing a different person in the mirror. Clothes need replacing. Confidence is building.</p>
+          </div>
+        </div>
+
+        <div class="flex gap-4">
+          <div class="shrink-0 w-10 h-10 rounded-full bg-sota-btn/10 flex items-center justify-center">
+            <span class="text-[14px] font-bold text-sota-btn">4</span>
+          </div>
+          <div>
+            <h3 class="text-[16px] font-semibold text-sota-dark mb-1">Phase 4: Goal &amp; Maintenance Transition</h3>
+            <p class="text-[14px] text-gray-500 leading-relaxed">As you reach your target, your nutritionist transitions you to the maintenance program with 65+ maintenance recipes and shopping lists. You have the habits, knowledge, and support system to keep the weight off for life.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CTA ============ -->
+  <section class="bg-sota-dark py-16 md:py-20 px-6">
+    <div class="max-w-[700px] mx-auto text-center">
+      <h2 class="font-serif text-[32px] md:text-[44px] text-white leading-tight mb-4">Ready for a Life-Changing Transformation?</h2>
+      <p class="text-[15px] text-white/50 mb-8 max-w-[440px] mx-auto">Book your free nutritionist strategy session. We'll build a long-term plan designed for lasting success.</p>
+      <a href="book.html" class="inline-block bg-sota-btn text-white text-[16px] md:text-[18px] font-semibold px-12 py-5 rounded-full hover:bg-sota-btn-hover transition cursor-pointer shadow-lg shadow-sota-btn/20">Request a Free Call with a Nutritionist</a>
+      <p class="text-[13px] text-white/40 mt-5">Or call <a href="tel:8668007682" class="underline hover:text-white/60 transition">866-800-7682</a></p>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="bg-sota-dark border-t border-white/10 py-10 px-6">
+    <div class="max-w-[1000px] mx-auto flex items-start justify-between flex-wrap gap-8">
+      <div>
+        <div class="flex items-baseline" style="gap: 2px;">
+          <span class="sota-logo text-[24px] text-white">SOTA</span>
+          <span class="text-[5px] text-white/40" style="letter-spacing: 0.1em; font-family: 'DM Sans', sans-serif; font-weight: 400;">WEIGHT LOSS</span>
+        </div>
+        <span class="sota-logo-sub text-[8px] text-white/40 block -mt-0.5">DIET AND NUTRITION</span>
+        <p class="text-[12px] text-white/40 mt-4 leading-relaxed max-w-[220px]">The #1 weight loss program in America for nutritionist client care satisfaction.</p>
+      </div>
+      <div class="text-[12px] text-white/50 space-y-2">
+        <p class="text-white/70 font-medium mb-2">Program</p>
+        <p><a href="index.html#method" class="hover:text-white/80 transition">The SOTA Method</a></p>
+        <p><a href="index.html#coaching" class="hover:text-white/80 transition">Coaching</a></p>
+        <p><a href="index.html#results" class="hover:text-white/80 transition">Results</a></p>
+      </div>
+      <div class="text-[12px] text-white/50 space-y-2">
+        <p class="text-white/70 font-medium mb-2">Locations</p>
+        <p>Fort Worth, TX</p>
+        <p>Nationwide (Phone)</p>
+        <p><a href="locations.html" class="hover:text-white/80 transition">View Locations</a></p>
+      </div>
+      <div class="text-[12px] text-white/50 space-y-2">
+        <p class="text-white/70 font-medium mb-2">Contact</p>
+        <p><a href="tel:8668007682" class="hover:text-white/80 transition">866-800-7682</a></p>
+        <p>sotaweightloss.com</p>
+      </div>
+      <div class="text-[12px] text-white/50 space-y-2">
+        <p class="text-white/70 font-medium mb-2">Follow Us</p>
+        <p><a href="https://www.facebook.com/share/1Dfuzw7dTo/?mibextid=wwXIfr" target="_blank" rel="noopener" class="inline-flex items-center gap-2 hover:text-white/80 transition"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>Facebook</a></p>
+        <p><a href="https://www.instagram.com/sotaweightloss" target="_blank" rel="noopener" class="inline-flex items-center gap-2 hover:text-white/80 transition"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>Instagram</a></p>
+      </div>
+    </div>
+    <div class="max-w-[1000px] mx-auto mt-8 pt-4 border-t border-white/10 flex flex-wrap items-center justify-between gap-4">
+      <p class="text-[11px] text-white/30">&copy; 2026 SOTA Diet and Nutrition. All rights reserved.</p>
+      <p class="text-[10px] text-white/20 max-w-[400px]">Weight loss results may vary. Before/after photos are not photoshopped. Consult your physician before starting any weight loss program.</p>
+    </div>
+  </footer>
+
+  <script>
+    (function() {
+      const btn = document.getElementById('mobile-menu-btn');
+      const menu = document.getElementById('mobile-menu');
+      btn.addEventListener('click', () => menu.classList.toggle('hidden'));
+      menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menu.classList.add('hidden')));
+    })();
+  </script>
+
+</body>
+</html>

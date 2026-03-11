@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SOTA Members Area - Recipes & Resources</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300;1,9..40,400&family=DM+Serif+Display&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'sota-dark': '#111111',
+            'sota-charcoal': '#1A1A1A',
+            'sota-btn': '#16A34A',
+            'sota-btn-hover': '#15803D',
+            'sota-sage': '#D8D8D8',
+            'sota-light': '#F0F0F0',
+            'sota-cream': '#EBEBEB',
+            'sota-bg': '#F5F5F5',
+            'sota-warm': '#F0EDE8',
+            'sota-success': '#22C55E',
+          },
+          fontFamily: {
+            'display': ['Bebas Neue', 'sans-serif'],
+            'sans': ['DM Sans', 'Helvetica', 'Arial', 'sans-serif'],
+            'serif': ['DM Serif Display', 'Georgia', 'serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { -webkit-font-smoothing: antialiased; }
+    .sota-logo { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.08em; line-height: 0.85; }
+    .sota-logo-sub { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.25em; font-size: 0.38em; }
+    .scrollbar-hide::-webkit-scrollbar { display: none; }
+    .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+    [data-tab-panel]:not(.hidden) { animation: fadeIn 0.25s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  </style>
+  <script>
+    // Prevent password gate flash if already authenticated
+    if (sessionStorage.getItem('sota-members-auth') === 'true') {
+      document.documentElement.classList.add('sota-authed');
+      var s = document.createElement('style');
+      s.textContent = '.sota-authed #password-gate{display:none!important}.sota-authed #members-content{display:block!important}';
+      document.head.appendChild(s);
+    }
+  </script>
+</head>
+<body class="bg-white font-sans text-gray-900 antialiased">
+
+  <!-- NAV -->
+  <nav class="bg-white sticky top-0 z-50 border-b border-gray-100 shadow-sm">
+    <div class="max-w-[1200px] mx-auto px-6 flex items-center justify-between h-14">
+      <a href="index.html" class="text-sota-dark block leading-none">
+        <div class="flex items-baseline" style="gap: 2px;">
+          <span class="sota-logo text-[36px]">SOTA</span>
+          <span class="text-[7px] text-sota-dark" style="letter-spacing: 0.1em; font-family: 'DM Sans', sans-serif; font-weight: 400;">WEIGHT LOSS</span>
+        </div>
+        <span class="sota-logo-sub text-[12px] block text-gray-500 -mt-0.5">DIET AND NUTRITION</span>
+      </a>
+      <div class="hidden md:flex items-center gap-6 text-sm">
+        <a href="index.html" class="text-gray-500 hover:text-gray-900 text-[13px] transition">Home</a>
+        <div class="relative group">
+          <button class="text-gray-500 hover:text-gray-900 text-[13px] transition cursor-pointer flex items-center gap-1">Results <svg class="w-3 h-3 opacity-50" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg></button>
+          <div class="absolute top-full left-1/2 -translate-x-1/2 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+            <div class="bg-white rounded-xl shadow-lg border border-gray-100 py-2 min-w-[180px]">
+              <a href="index.html#results" class="block px-4 py-2 text-[13px] text-gray-600 hover:text-sota-dark hover:bg-gray-50 transition">Before & After Photos</a>
+              <a href="index.html#reviews" class="block px-4 py-2 text-[13px] text-gray-600 hover:text-sota-dark hover:bg-gray-50 transition">Reviews</a>
+            </div>
+          </div>
+        </div>
+        <a href="locations.html" class="text-gray-500 hover:text-gray-900 text-[13px] transition">Locations Served</a>
+        <a href="members.html" class="text-sota-btn font-medium text-[13px] transition">Members</a>
+        <a href="book.html" class="bg-sota-btn text-white text-[12px] font-semibold px-5 py-2 rounded-full hover:bg-sota-btn-hover transition cursor-pointer">Free Nutritionist Call</a>
+      </div>
+      <button id="mobile-menu-btn" class="md:hidden w-8 h-8 flex items-center justify-center">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 px-6 py-4 space-y-1">
+      <div>
+        <button onclick="this.nextElementSibling.classList.toggle('hidden');this.querySelector('svg').classList.toggle('rotate-180')" class="flex items-center justify-between w-full text-gray-600 text-[14px] py-2">Results <svg class="w-3 h-3 opacity-50 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg></button>
+        <div class="hidden pl-4 space-y-1 pb-2">
+          <a href="index.html#results" class="block text-gray-500 text-[13px] py-1">Before & After Photos</a>
+          <a href="index.html#reviews" class="block text-gray-500 text-[13px] py-1">Reviews</a>
+        </div>
+      </div>
+      <div>
+        <button onclick="this.nextElementSibling.classList.toggle('hidden');this.querySelector('svg').classList.toggle('rotate-180')" class="flex items-center justify-between w-full text-gray-600 text-[14px] py-2">Programs <svg class="w-3 h-3 opacity-50 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg></button>
+        <div class="hidden pl-4 space-y-1 pb-2">
+          <a href="weight-loss.html" class="block text-gray-500 text-[13px] py-1">Weight Loss</a>
+          <a href="diet-reset.html" class="block text-gray-500 text-[13px] py-1">Diet Reset</a>
+          <a href="nutrition-guidance.html" class="block text-gray-500 text-[13px] py-1">Nutrition Guidance</a>
+        </div>
+      </div>
+      <a href="index.html#method" class="block text-gray-600 text-[14px] py-2">How It Works</a>
+      <a href="index.html#coaching" class="block text-gray-600 text-[14px] py-2">Coaching</a>
+      <a href="locations.html" class="block text-gray-600 text-[14px] py-2">Locations Served</a>
+      <a href="members.html" class="block text-gray-600 text-[14px] py-2">Members</a>
+      <a href="book.html" class="block bg-sota-btn text-white text-center text-[14px] font-semibold py-3 rounded-full hover:bg-sota-btn-hover transition mt-2">Free Nutritionist Call</a>
+    </div>
+  </nav>
+
+  <!-- PASSWORD GATE -->
+  <div id="password-gate" class="min-h-[80vh] flex items-center justify-center px-6">
+    <div class="max-w-[380px] w-full text-center">
+      <div class="w-16 h-16 rounded-full bg-sota-btn/10 flex items-center justify-center mx-auto mb-6">
+        <svg class="w-7 h-7 text-sota-btn" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"/></svg>
+      </div>
+      <h1 class="font-serif text-[32px] text-sota-dark leading-tight mb-2">Members Area</h1>
+      <p class="text-[14px] text-gray-500 mb-8">Enter your password to access exclusive recipes, shopping lists, workouts, and more.</p>
+      <form id="password-form" class="space-y-4">
+        <input id="password-input" type="password" placeholder="Enter password" class="w-full px-5 py-3.5 border border-gray-300 rounded-xl text-[15px] focus:outline-none focus:border-sota-btn focus:ring-2 focus:ring-sota-btn/20 transition">
+        <button type="submit" class="w-full bg-sota-btn text-white text-[15px] font-semibold py-3.5 rounded-xl hover:bg-sota-btn-hover transition cursor-pointer">Access Members Area</button>
+      </form>
+      <p id="password-error" class="text-red-500 text-[13px] mt-3 hidden">Incorrect password. Please try again.</p>
+      <p class="text-[12px] text-gray-400 mt-6">Contact your nutritionist if you need your password.</p>
+    </div>
+  </div>
+
+  <!-- MEMBERS CONTENT -->
+  <div id="members-content" class="hidden">
+
+    <!-- WELCOME BANNER -->
+    <section class="bg-sota-warm py-8 md:py-12 px-6">
+      <div class="max-w-[1000px] mx-auto">
+        <p class="text-[13px] text-gray-400 uppercase tracking-[0.2em] mb-2">Welcome back</p>
+        <h1 class="font-serif text-[32px] md:text-[42px] text-sota-dark leading-tight mb-6">Your SOTA Dashboard</h1>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+          <button data-switch-tab="weekly" class="bg-white rounded-xl p-4 text-left hover:shadow-md transition cursor-pointer">
+            <span class="text-[24px] font-bold text-sota-btn block">185</span>
+            <span class="text-[12px] text-gray-500">Recipes</span>
+          </button>
+          <button data-switch-tab="weekly" class="bg-white rounded-xl p-4 text-left hover:shadow-md transition cursor-pointer">
+            <span class="text-[24px] font-bold text-sota-dark block">4</span>
+            <span class="text-[12px] text-gray-500">Shopping Lists</span>
+          </button>
+          <button data-switch-tab="exercise" class="bg-white rounded-xl p-4 text-left hover:shadow-md transition cursor-pointer">
+            <span class="text-[24px] font-bold text-sota-dark block">6</span>
+            <span class="text-[12px] text-gray-500">Workout Videos</span>
+          </button>
+          <button data-switch-tab="mindset" class="bg-white rounded-xl p-4 text-left hover:shadow-md transition cursor-pointer">
+            <span class="text-[24px] font-bold text-sota-dark block">13</span>
+            <span class="text-[12px] text-gray-500">Audio Sessions</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- STICKY TAB BAR -->
+    <div class="sticky top-[56px] z-40 bg-white border-b border-gray-200 shadow-sm">
+      <div class="max-w-[1000px] mx-auto px-6 flex gap-1 overflow-x-auto scrollbar-hide">
+        <button data-tab-btn="weekly" class="text-sota-btn border-b-2 border-sota-btn text-[13px] font-medium px-4 py-3.5 whitespace-nowrap transition">Weekly Program</button>
+        <button data-tab-btn="maintenance" class="text-gray-500 border-b-2 border-transparent text-[13px] font-medium px-4 py-3.5 whitespace-nowrap hover:text-gray-700 transition flex items-center gap-1.5">Maintenance <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"/></svg></button>
+        <button data-tab-btn="exercise" class="text-gray-500 border-b-2 border-transparent text-[13px] font-medium px-4 py-3.5 whitespace-nowrap hover:text-gray-700 transition">Exercise Videos</button>
+        <button data-tab-btn="mindset" class="text-gray-500 border-b-2 border-transparent text-[13px] font-medium px-4 py-3.5 whitespace-nowrap hover:text-gray-700 transition">Mindset</button>
+      </div>
+    </div>
+
+    <!-- TAB CONTENT -->
+    <div id="tab-content">
+
+      <!-- ==================== TAB: WEEKLY PROGRAM ==================== -->
+      <div data-tab-panel="weekly">
+        <section class="bg-white py-10 md:py-14 px-6">
+          <div class="max-w-[1000px] mx-auto">
+            <!-- Sub-tabs -->
+            <div data-subtab-group="weekly" class="flex gap-2 mb-8">
+              <button data-subtab-btn="recipes" class="bg-sota-dark text-white text-[12px] font-medium px-5 py-2.5 rounded-full transition">Recipes</button>
+              <button data-subtab-btn="shopping" class="bg-sota-bg text-gray-600 text-[12px] font-medium px-5 py-2.5 rounded-full hover:bg-gray-200 transition">Shopping Lists</button>
+            </div>
+
+            <!-- RECIPES SUB-PANEL -->
+            <div data-subtab-panel="recipes" data-subtab-group="weekly">
+              <!-- Search -->
+              <div class="relative mb-5">
+                <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/></svg>
+                <input type="text" id="weekly-recipe-search" placeholder="Search recipes..." class="w-full pl-12 pr-4 py-3.5 bg-sota-bg border border-gray-200 rounded-xl text-[14px] focus:outline-none focus:border-sota-btn focus:ring-2 focus:ring-sota-btn/20 transition">
+              </div>
+              <!-- Category chips -->
+              <div data-filter-group="weekly-category" class="flex gap-2 overflow-x-auto pb-3 scrollbar-hide mb-3">
+                <button data-filter-chip="all" class="bg-sota-dark text-white text-[12px] font-medium px-4 py-2 rounded-full whitespace-nowrap transition">All Recipes</button>
+                <button data-filter-chip="chicken" class="bg-sota-bg text-gray-600 text-[12px] font-medium px-4 py-2 rounded-full whitespace-nowrap hover:bg-gray-200 transition">Chicken</button>
+                <button data-filter-chip="beef" class="bg-sota-bg text-gray-600 text-[12px] font-medium px-4 py-2 rounded-full whitespace-nowrap hover:bg-gray-200 transition">Beef</button>
+                <button data-filter-chip="seafood" class="bg-sota-bg text-gray-600 text-[12px] font-medium px-4 py-2 rounded-full whitespace-nowrap hover:bg-gray-200 transition">Seafood</button>
+                <button data-filter-chip="pork" class="bg-sota-bg text-gray-600 text-[12px] font-medium px-4 py-2 rounded-full whitespace-nowrap hover:bg-gray-200 transition">Pork & Lamb</button>
+                <button data-filter-chip="veggies" class="bg-sota-bg text-gray-600 text-[12px] font-medium px-4 py-2 rounded-full whitespace-nowrap hover:bg-gray-200 transition">Veggies & Sides</button>
+                <button data-filter-chip="sauces" class="bg-sota-bg text-gray-600 text-[12px] font-medium px-4 py-2 rounded-full whitespace-nowrap hover:bg-gray-200 transition">Sauces & Dips</button>
+                <button data-filter-chip="breakfast" class="bg-sota-bg text-gray-600 text-[12px] font-medium px-4 py-2 rounded-full whitespace-nowrap hover:bg-gray-200 transition">Breakfast</button>
+              </div>
+              <!-- Tag chips -->
+              <div data-filter-group="weekly-tags" class="flex gap-2 overflow-x-auto pb-4 scrollbar-hide mb-6">
+                <button data-filter-chip="air-fryer" class="bg-sota-bg text-gray-500 text-[11px] font-medium px-3 py-1.5 rounded-full whitespace-nowrap hover:bg-gray-200 transition">Air Fryer</button>
+                <button data-filter-chip="crock-pot" class="bg-sota-bg text-gray-500 text-[11px] font-medium px-3 py-1.5 rounded-full whitespace-nowrap hover:bg-gray-200 transition">Crock Pot</button>
+                <button data-filter-chip="spicy" class="bg-sota-bg text-gray-500 text-[11px] font-medium px-3 py-1.5 rounded-full whitespace-nowrap hover:bg-gray-200 transition">Spicy</button>
+                <button data-filter-chip="salad" class="bg-sota-bg text-gray-500 text-[11px] font-medium px-3 py-1.5 rounded-full whitespace-nowrap hover:bg-gray-200 transition">Salad</button>
+              </div>
+              <!-- Recipe grid (JS-generated from recipe-data.js) -->
+              <div id="weekly-recipe-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+              <div id="weekly-no-results" class="hidden text-center py-12"><p class="text-gray-400 text-[14px]">No recipes match your filters. Try adjusting your search.</p></div>
+            </div>
+
+            <!-- SHOPPING LISTS SUB-PANEL -->
+            <div data-subtab-panel="shopping" data-subtab-group="weekly" class="hidden">
+              <p class="text-[15px] text-gray-600 mb-6">Download your weekly shopping list by store.</p>
+              <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <a href="shopping-lists/central-market-weekly.pdf" target="_blank" class="bg-white rounded-2xl p-6 text-center block border border-gray-100 hover:border-sota-btn/30 hover:shadow-md hover:-translate-y-1 transition-all duration-200"><div class="h-16 flex items-center justify-center mx-auto mb-4"><img src="images/members/shopping/central-market.png" alt="Central Market" class="max-h-full max-w-[120px] object-contain"></div><h3 class="text-[14px] font-semibold text-sota-dark mb-1">Central Market</h3><p class="text-[12px] text-gray-400 mb-3">Weekly list</p><span class="inline-flex items-center gap-1.5 text-[12px] text-sota-btn font-medium"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg>Download PDF</span></a>
+                <a href="shopping-lists/sprouts-weekly.pdf" target="_blank" class="bg-white rounded-2xl p-6 text-center block border border-gray-100 hover:border-sota-btn/30 hover:shadow-md hover:-translate-y-1 transition-all duration-200"><div class="h-16 flex items-center justify-center mx-auto mb-4"><img src="images/members/shopping/sprouts.png" alt="Sprouts" class="max-h-full max-w-[120px] object-contain"></div><h3 class="text-[14px] font-semibold text-sota-dark mb-1">Sprouts</h3><p class="text-[12px] text-gray-400 mb-3">Weekly list</p><span class="inline-flex items-center gap-1.5 text-[12px] text-sota-btn font-medium"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg>Download PDF</span></a>
+                <a href="shopping-lists/trader-joes-weekly.pdf" target="_blank" class="bg-white rounded-2xl p-6 text-center block border border-gray-100 hover:border-sota-btn/30 hover:shadow-md hover:-translate-y-1 transition-all duration-200"><div class="h-16 flex items-center justify-center mx-auto mb-4"><img src="images/members/shopping/trader-joes.png" alt="Trader Joe's" class="max-h-full max-w-[120px] object-contain"></div><h3 class="text-[14px] font-semibold text-sota-dark mb-1">Trader Joe's</h3><p class="text-[12px] text-gray-400 mb-3">Weekly list</p><span class="inline-flex items-center gap-1.5 text-[12px] text-sota-btn font-medium"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg>Download PDF</span></a>
+                <a href="shopping-lists/costco-weekly.pdf" target="_blank" class="bg-white rounded-2xl p-6 text-center block border border-gray-100 hover:border-sota-btn/30 hover:shadow-md hover:-translate-y-1 transition-all duration-200"><div class="h-16 flex items-center justify-center mx-auto mb-4"><img src="images/members/shopping/costco.png" alt="Costco" class="max-h-full max-w-[120px] object-contain"></div><h3 class="text-[14px] font-semibold text-sota-dark mb-1">Costco</h3><p class="text-[12px] text-gray-400 mb-3">Weekly list</p><span class="inline-flex items-center gap-1.5 text-[12px] text-sota-btn font-medium"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg>Download PDF</span></a>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- ==================== TAB: MAINTENANCE ==================== -->
+      <div data-tab-panel="maintenance" class="hidden">
+        <!-- Maintenance Gate -->
+        <div id="maintenance-gate" class="py-16 md:py-24 px-6">
+          <div class="max-w-[380px] mx-auto text-center">
+            <div class="w-16 h-16 rounded-full bg-amber-100 flex items-center justify-center mx-auto mb-6">
+              <svg class="w-7 h-7 text-amber-500" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/></svg>
+            </div>
+            <h2 class="font-serif text-[32px] text-sota-dark leading-tight mb-2">Maintenance Program</h2>
+            <p class="text-[14px] text-gray-500 mb-8">Congratulations on reaching your goal! Enter your maintenance password to access exclusive recipes and shopping lists.</p>
+            <form id="maintenance-password-form" class="space-y-4">
+              <input id="maintenance-password-input" type="password" placeholder="Enter maintenance password" class="w-full px-5 py-3.5 border border-gray-300 rounded-xl text-[15px] focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 transition">
+              <button type="submit" class="w-full bg-sota-btn text-white text-[15px] font-semibold py-3.5 rounded-xl hover:bg-sota-btn-hover transition cursor-pointer">Unlock Maintenance</button>
+            </form>
+            <p id="maintenance-password-error" class="text-red-500 text-[13px] mt-3 hidden">Incorrect password. Please try again.</p>
+            <p class="text-[12px] text-gray-400 mt-6">Your nutritionist will provide this password when you graduate.</p>
+          </div>
+        </div>
+        <!-- Maintenance Content -->
+        <div id="maintenance-content" class="hidden">
+          <section class="bg-white py-10 md:py-14 px-6">
+            <div class="max-w-[1000px] mx-auto">
+              <div data-subtab-group="maintenance" class="flex gap-2 mb-8">
+                <button data-subtab-btn="m-recipes" class="bg-sota-dark text-white text-[12px] font-medium px-5 py-2.5 rounded-full transition">Recipes</button>
+                <button data-subtab-btn="m-shopping" class="bg-sota-bg text-gray-600 text-[12px] font-medium px-5 py-2.5 rounded-full hover:bg-gray-200 transition">Shopping Lists</button>
+              </div>
+              <!-- Maintenance Recipes -->
+              <div data-subtab-panel="m-recipes" data-subtab-group="maintenance">
+                <div class="relative mb-5">
+                  <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/></svg>
+                  <input type="text" id="maintenance-recipe-search" placeholder="Search maintenance recipes..." class="w-full pl-12 pr-4 py-3.5 bg-sota-bg border border-gray-200 rounded-xl text-[14px] focus:outline-none focus:border-sota-btn focus:ring-2 focus:ring-sota-btn/20 transition">
+                </div>
+                <div data-filter-group="maintenance-category" class="flex gap-2 overflow-x-auto pb-3 scrollbar-hide mb-6">
+                  <button data-filter-chip="all" class="bg-sota-dark text-white text-[12px] font-medium px-4 py-2 rounded-full whitespace-nowrap transition">All</button>
+                  <button data-filter-chip="chicken" class="bg-sota-bg text-gray-600 text-[12px] font-medium px-4 py-2 rounded-full whitespace-nowrap hover:bg-gray-200 transition">Chicken</button>
+                  <button data-filter-chip="beef" class="bg-sota-bg text-gray-600 text-[12px] font-medium px-4 py-2 rounded-full whitespace-nowrap hover:bg-gray-200 transition">Beef</button>
+                  <button data-filter-chip="seafood" class="bg-sota-bg text-gray-600 text-[12px] font-medium px-4 py-2 rounded-full whitespace-nowrap hover:bg-gray-200 transition">Seafood</button>
+                  <button data-filter-chip="pork" class="bg-sota-bg text-gray-600 text-[12px] font-medium px-4 py-2 rounded-full whitespace-nowrap hover:bg-gray-200 transition">Pork</button>
+                  <button data-filter-chip="veggies" class="bg-sota-bg text-gray-600 text-[12px] font-medium px-4 py-2 rounded-full whitespace-nowrap hover:bg-gray-200 transition">Veggies & Sides</button>
+                  <button data-filter-chip="sauces" class="bg-sota-bg text-gray-600 text-[12px] font-medium px-4 py-2 rounded-full whitespace-nowrap hover:bg-gray-200 transition">Sauces & Dips</button>
+                  <button data-filter-chip="breakfast" class="bg-sota-bg text-gray-600 text-[12px] font-medium px-4 py-2 rounded-full whitespace-nowrap hover:bg-gray-200 transition">Breakfast</button>
+                  <button data-filter-chip="snack" class="bg-sota-bg text-gray-600 text-[12px] font-medium px-4 py-2 rounded-full whitespace-nowrap hover:bg-gray-200 transition">Snacks & Treats</button>
+                </div>
+                <div id="maintenance-recipe-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                </div>
+                <div id="maintenance-no-results" class="hidden text-center py-12"><p class="text-gray-400 text-[14px]">No recipes match your filters.</p></div>
+              </div>
+              <!-- Maintenance Shopping Lists -->
+              <div data-subtab-panel="m-shopping" data-subtab-group="maintenance" class="hidden">
+                <p class="text-[15px] text-gray-600 mb-6">Download your maintenance shopping list by store or by product.</p>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                  <a href="maintenance-shopping-lists/amazon.pdf" target="_blank" class="bg-white rounded-2xl p-6 text-center block border border-gray-100 hover:border-sota-btn/30 hover:shadow-md hover:-translate-y-1 transition-all duration-200"><div class="h-16 flex items-center justify-center mx-auto mb-4"><img src="images/members/shopping/amazon.png" alt="Amazon" class="max-h-full max-w-[120px] object-contain"></div><h3 class="text-[14px] font-semibold text-sota-dark mb-1">Amazon</h3><span class="inline-flex items-center gap-1.5 text-[12px] text-sota-btn font-medium"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg>PDF</span></a>
+                  <a href="maintenance-shopping-lists/central-market-maintenance.pdf" target="_blank" class="bg-white rounded-2xl p-6 text-center block border border-gray-100 hover:border-sota-btn/30 hover:shadow-md hover:-translate-y-1 transition-all duration-200"><div class="h-16 flex items-center justify-center mx-auto mb-4"><img src="images/members/shopping/central-market.png" alt="Central Market" class="max-h-full max-w-[120px] object-contain"></div><h3 class="text-[14px] font-semibold text-sota-dark mb-1">Central Market</h3><span class="inline-flex items-center gap-1.5 text-[12px] text-sota-btn font-medium"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg>PDF</span></a>
+                  <a href="maintenance-shopping-lists/costco-maintenance.pdf" target="_blank" class="bg-white rounded-2xl p-6 text-center block border border-gray-100 hover:border-sota-btn/30 hover:shadow-md hover:-translate-y-1 transition-all duration-200"><div class="h-16 flex items-center justify-center mx-auto mb-4"><img src="images/members/shopping/costco.png" alt="Costco" class="max-h-full max-w-[120px] object-contain"></div><h3 class="text-[14px] font-semibold text-sota-dark mb-1">Costco</h3><span class="inline-flex items-center gap-1.5 text-[12px] text-sota-btn font-medium"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg>PDF</span></a>
+                  <a href="maintenance-shopping-lists/sprouts-maintenance.pdf" target="_blank" class="bg-white rounded-2xl p-6 text-center block border border-gray-100 hover:border-sota-btn/30 hover:shadow-md hover:-translate-y-1 transition-all duration-200"><div class="h-16 flex items-center justify-center mx-auto mb-4"><img src="images/members/shopping/sprouts.png" alt="Sprouts" class="max-h-full max-w-[120px] object-contain"></div><h3 class="text-[14px] font-semibold text-sota-dark mb-1">Sprouts</h3><span class="inline-flex items-center gap-1.5 text-[12px] text-sota-btn font-medium"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg>PDF</span></a>
+                  <a href="maintenance-shopping-lists/starbucks-maintenance.pdf" target="_blank" class="bg-white rounded-2xl p-6 text-center block border border-gray-100 hover:border-sota-btn/30 hover:shadow-md hover:-translate-y-1 transition-all duration-200"><div class="h-16 flex items-center justify-center mx-auto mb-4"><img src="images/members/shopping/starbucks.png" alt="Starbucks" class="max-h-full max-w-[120px] object-contain"></div><h3 class="text-[14px] font-semibold text-sota-dark mb-1">Starbucks</h3><span class="inline-flex items-center gap-1.5 text-[12px] text-sota-btn font-medium"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg>PDF</span></a>
+                  <a href="maintenance-shopping-lists/thrive-maintenance.pdf" target="_blank" class="bg-white rounded-2xl p-6 text-center block border border-gray-100 hover:border-sota-btn/30 hover:shadow-md hover:-translate-y-1 transition-all duration-200"><div class="h-16 flex items-center justify-center mx-auto mb-4"><img src="images/members/shopping/thrive-market.png" alt="Thrive Market" class="max-h-full max-w-[120px] object-contain"></div><h3 class="text-[14px] font-semibold text-sota-dark mb-1">Thrive Market</h3><span class="inline-flex items-center gap-1.5 text-[12px] text-sota-btn font-medium"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg>PDF</span></a>
+                  <a href="maintenance-shopping-lists/trader-joes-maintenance.pdf" target="_blank" class="bg-white rounded-2xl p-6 text-center block border border-gray-100 hover:border-sota-btn/30 hover:shadow-md hover:-translate-y-1 transition-all duration-200"><div class="h-16 flex items-center justify-center mx-auto mb-4"><img src="images/members/shopping/trader-joes.png" alt="Trader Joe's" class="max-h-full max-w-[120px] object-contain"></div><h3 class="text-[14px] font-semibold text-sota-dark mb-1">Trader Joe's</h3><span class="inline-flex items-center gap-1.5 text-[12px] text-sota-btn font-medium"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg>PDF</span></a>
+                  <a href="maintenance-shopping-lists/whole-foods-maintenance.pdf" target="_blank" class="bg-white rounded-2xl p-6 text-center block border border-gray-100 hover:border-sota-btn/30 hover:shadow-md hover:-translate-y-1 transition-all duration-200"><div class="h-16 flex items-center justify-center mx-auto mb-4"><img src="images/members/shopping/whole-foods.png" alt="Whole Foods" class="max-h-full max-w-[120px] object-contain"></div><h3 class="text-[14px] font-semibold text-sota-dark mb-1">Whole Foods</h3><span class="inline-flex items-center gap-1.5 text-[12px] text-sota-btn font-medium"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg>PDF</span></a>
+                  <a href="maintenance-shopping-lists/maintenance-shopping-list-by-product.pdf" target="_blank" class="bg-white rounded-2xl p-6 text-center block border border-gray-100 hover:border-sota-btn/30 hover:shadow-md hover:-translate-y-1 transition-all duration-200"><div class="h-16 flex items-center justify-center mx-auto mb-4"><svg class="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z"/></svg></div><h3 class="text-[14px] font-semibold text-sota-dark mb-1">Shop by Product</h3><span class="inline-flex items-center gap-1.5 text-[12px] text-sota-btn font-medium"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg>PDF</span></a>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <!-- ==================== TAB: EXERCISE VIDEOS ==================== -->
+      <div data-tab-panel="exercise" class="hidden">
+        <section class="bg-white py-10 md:py-14 px-6">
+          <div class="max-w-[1000px] mx-auto">
+            <p class="text-[13px] text-gray-400 uppercase tracking-[0.2em] mb-2">Guided workouts</p>
+            <h2 class="font-serif text-[28px] md:text-[36px] text-sota-dark leading-tight mb-10">Exercise Videos</h2>
+            <!-- Lower Body -->
+            <div class="mb-12">
+              <h3 class="text-[12px] text-gray-400 uppercase tracking-[0.15em] mb-4 font-medium">Lower Body</h3>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-200 cursor-pointer" data-video-card data-video-title="Brazilian Butt Lift: Part 1"><div class="relative"><img src="images/members/exercises/brazilian-butt-lift-1.jpg" alt="Brazilian Butt Lift Part 1" class="w-full h-44 object-cover" loading="lazy"><div class="absolute inset-0 bg-black/30"></div><div class="absolute inset-0 flex items-center justify-center"><div class="w-14 h-14 rounded-full bg-white/90 flex items-center justify-center shadow-lg"><svg class="w-6 h-6 text-sota-dark ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div></div><div class="p-5"><p class="text-[11px] text-sota-btn font-semibold uppercase tracking-wider mb-1.5">Lower Body</p><h3 class="text-[15px] font-semibold text-sota-dark leading-snug">Brazilian Butt Lift: Part 1</h3></div></div>
+                <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-200 cursor-pointer" data-video-card data-video-title="Brazilian Butt Lift: Part 2"><div class="relative"><img src="images/members/exercises/brazilian-butt-lift-2.jpg" alt="Brazilian Butt Lift Part 2" class="w-full h-44 object-cover" loading="lazy"><div class="absolute inset-0 bg-black/30"></div><div class="absolute inset-0 flex items-center justify-center"><div class="w-14 h-14 rounded-full bg-white/90 flex items-center justify-center shadow-lg"><svg class="w-6 h-6 text-sota-dark ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div></div><div class="p-5"><p class="text-[11px] text-sota-btn font-semibold uppercase tracking-wider mb-1.5">Lower Body</p><h3 class="text-[15px] font-semibold text-sota-dark leading-snug">Brazilian Butt Lift: Part 2</h3></div></div>
+                <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-200 cursor-pointer" data-video-card data-video-title="Brazilian Butt Lift: Part 3"><div class="relative"><img src="images/members/exercises/brazilian-butt-lift-3.jpg" alt="Brazilian Butt Lift Part 3" class="w-full h-44 object-cover" loading="lazy"><div class="absolute inset-0 bg-black/30"></div><div class="absolute inset-0 flex items-center justify-center"><div class="w-14 h-14 rounded-full bg-white/90 flex items-center justify-center shadow-lg"><svg class="w-6 h-6 text-sota-dark ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div></div><div class="p-5"><p class="text-[11px] text-sota-btn font-semibold uppercase tracking-wider mb-1.5">Lower Body</p><h3 class="text-[15px] font-semibold text-sota-dark leading-snug">Brazilian Butt Lift: Part 3</h3></div></div>
+              </div>
+            </div>
+            <!-- Upper Body -->
+            <div class="mb-12">
+              <h3 class="text-[12px] text-gray-400 uppercase tracking-[0.15em] mb-4 font-medium">Upper Body</h3>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-200 cursor-pointer" data-video-card data-video-title="Upper Body Exercise: Part 1"><div class="relative"><img src="images/members/exercises/upper-body-1.jpg" alt="Upper Body Exercise Part 1" class="w-full h-44 object-cover" loading="lazy"><div class="absolute inset-0 bg-black/30"></div><div class="absolute inset-0 flex items-center justify-center"><div class="w-14 h-14 rounded-full bg-white/90 flex items-center justify-center shadow-lg"><svg class="w-6 h-6 text-sota-dark ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div></div><div class="p-5"><p class="text-[11px] text-sota-btn font-semibold uppercase tracking-wider mb-1.5">Upper Body</p><h3 class="text-[15px] font-semibold text-sota-dark leading-snug">Upper Body Exercise: Part 1</h3></div></div>
+                <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-200 cursor-pointer" data-video-card data-video-title="Upper Body Exercise: Part 2"><div class="relative"><img src="images/members/exercises/upper-body-2.jpg" alt="Upper Body Exercise Part 2" class="w-full h-44 object-cover" loading="lazy"><div class="absolute inset-0 bg-black/30"></div><div class="absolute inset-0 flex items-center justify-center"><div class="w-14 h-14 rounded-full bg-white/90 flex items-center justify-center shadow-lg"><svg class="w-6 h-6 text-sota-dark ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div></div><div class="p-5"><p class="text-[11px] text-sota-btn font-semibold uppercase tracking-wider mb-1.5">Upper Body</p><h3 class="text-[15px] font-semibold text-sota-dark leading-snug">Upper Body Exercise: Part 2</h3></div></div>
+              </div>
+            </div>
+            <!-- Core -->
+            <div>
+              <h3 class="text-[12px] text-gray-400 uppercase tracking-[0.15em] mb-4 font-medium">Core</h3>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-200 cursor-pointer" data-video-card data-video-title="3-Min Six Pack Abs Routine"><div class="relative"><img src="images/members/exercises/six-pack-abs.jpg" alt="3-Min Six Pack Abs Routine" class="w-full h-44 object-cover" loading="lazy"><div class="absolute inset-0 bg-black/30"></div><div class="absolute inset-0 flex items-center justify-center"><div class="w-14 h-14 rounded-full bg-white/90 flex items-center justify-center shadow-lg"><svg class="w-6 h-6 text-sota-dark ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div></div><div class="p-5"><p class="text-[11px] text-sota-btn font-semibold uppercase tracking-wider mb-1.5">Core</p><h3 class="text-[15px] font-semibold text-sota-dark leading-snug">3-Min Six Pack Abs Routine</h3></div></div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- ==================== TAB: MINDSET ==================== -->
+      <div data-tab-panel="mindset" class="hidden">
+        <section class="bg-white py-10 md:py-14 px-6">
+          <div class="max-w-[1000px] mx-auto">
+            <p class="text-[13px] text-gray-400 uppercase tracking-[0.2em] mb-2">Strengthen your mindset</p>
+            <h2 class="font-serif text-[28px] md:text-[36px] text-sota-dark leading-tight mb-8">Mindset & Motivation</h2>
+            <!-- Sub-tabs -->
+            <div data-subtab-group="mindset" class="flex gap-2 mb-8">
+              <button data-subtab-btn="all-audio" class="bg-sota-dark text-white text-[12px] font-medium px-5 py-2.5 rounded-full transition">All Sessions</button>
+              <button data-subtab-btn="empowerment" class="bg-sota-bg text-gray-600 text-[12px] font-medium px-5 py-2.5 rounded-full hover:bg-gray-200 transition">Empowerment</button>
+              <button data-subtab-btn="christian" class="bg-sota-bg text-gray-600 text-[12px] font-medium px-5 py-2.5 rounded-full hover:bg-gray-200 transition">Christian</button>
+            </div>
+
+            <!-- All audio sessions -->
+            <div id="audio-container">
+              <!-- Empowerment group -->
+              <h3 class="text-[12px] text-gray-400 uppercase tracking-[0.15em] mb-4 font-medium" data-audio-header="empowerment">Empowerment Sessions</h3>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-8">
+                <div class="bg-white rounded-xl p-4 flex items-center gap-4 border border-gray-100 hover:border-sota-btn/30 hover:shadow-sm transition-all duration-200 cursor-pointer" data-audio-type="empowerment"><div class="w-14 h-14 rounded-xl overflow-hidden shrink-0"><img src="images/members/audio/breaking-barriers.jpg" alt="Breaking Barriers" class="w-full h-full object-cover"></div><div class="flex-1 min-w-0"><h3 class="text-[14px] font-semibold text-sota-dark truncate">Breaking Barriers</h3><p class="text-[12px] text-gray-400">Empowerment &middot; 8 min</p></div><div class="w-10 h-10 rounded-full bg-sota-btn/10 flex items-center justify-center shrink-0"><svg class="w-4 h-4 text-sota-btn ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+                <div class="bg-white rounded-xl p-4 flex items-center gap-4 border border-gray-100 hover:border-sota-btn/30 hover:shadow-sm transition-all duration-200 cursor-pointer" data-audio-type="empowerment"><div class="w-14 h-14 rounded-xl overflow-hidden shrink-0"><img src="images/members/audio/your-body.jpg" alt="Your Body" class="w-full h-full object-cover"></div><div class="flex-1 min-w-0"><h3 class="text-[14px] font-semibold text-sota-dark truncate">Your Body</h3><p class="text-[12px] text-gray-400">Empowerment &middot; 6 min</p></div><div class="w-10 h-10 rounded-full bg-sota-btn/10 flex items-center justify-center shrink-0"><svg class="w-4 h-4 text-sota-btn ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+                <div class="bg-white rounded-xl p-4 flex items-center gap-4 border border-gray-100 hover:border-sota-btn/30 hover:shadow-sm transition-all duration-200 cursor-pointer" data-audio-type="empowerment"><div class="w-14 h-14 rounded-xl overflow-hidden shrink-0"><img src="images/members/audio/bad-habits.jpg" alt="Bad Habits & Reward" class="w-full h-full object-cover"></div><div class="flex-1 min-w-0"><h3 class="text-[14px] font-semibold text-sota-dark truncate">Bad Habits & Reward</h3><p class="text-[12px] text-gray-400">Empowerment &middot; 12 min</p></div><div class="w-10 h-10 rounded-full bg-sota-btn/10 flex items-center justify-center shrink-0"><svg class="w-4 h-4 text-sota-btn ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+                <div class="bg-white rounded-xl p-4 flex items-center gap-4 border border-gray-100 hover:border-sota-btn/30 hover:shadow-sm transition-all duration-200 cursor-pointer" data-audio-type="empowerment"><div class="w-14 h-14 rounded-xl overflow-hidden shrink-0"><img src="images/members/audio/finding-forgiveness.jpg" alt="Finding Forgiveness" class="w-full h-full object-cover"></div><div class="flex-1 min-w-0"><h3 class="text-[14px] font-semibold text-sota-dark truncate">Finding Forgiveness</h3><p class="text-[12px] text-gray-400">Empowerment &middot; 10 min</p></div><div class="w-10 h-10 rounded-full bg-sota-btn/10 flex items-center justify-center shrink-0"><svg class="w-4 h-4 text-sota-btn ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+                <div class="bg-white rounded-xl p-4 flex items-center gap-4 border border-gray-100 hover:border-sota-btn/30 hover:shadow-sm transition-all duration-200 cursor-pointer" data-audio-type="empowerment"><div class="w-14 h-14 rounded-xl overflow-hidden shrink-0"><img src="images/members/audio/motivational-1.jpg" alt="Motivational Session 1" class="w-full h-full object-cover"></div><div class="flex-1 min-w-0"><h3 class="text-[14px] font-semibold text-sota-dark truncate">Motivational Session 1</h3><p class="text-[12px] text-gray-400">Empowerment &middot; 15 min</p></div><div class="w-10 h-10 rounded-full bg-sota-btn/10 flex items-center justify-center shrink-0"><svg class="w-4 h-4 text-sota-btn ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+                <div class="bg-white rounded-xl p-4 flex items-center gap-4 border border-gray-100 hover:border-sota-btn/30 hover:shadow-sm transition-all duration-200 cursor-pointer" data-audio-type="empowerment"><div class="w-14 h-14 rounded-xl overflow-hidden shrink-0"><img src="images/members/audio/motivational-2.jpg" alt="Motivational Session 2" class="w-full h-full object-cover"></div><div class="flex-1 min-w-0"><h3 class="text-[14px] font-semibold text-sota-dark truncate">Motivational Session 2</h3><p class="text-[12px] text-gray-400">Empowerment &middot; 12 min</p></div><div class="w-10 h-10 rounded-full bg-sota-btn/10 flex items-center justify-center shrink-0"><svg class="w-4 h-4 text-sota-btn ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+                <div class="bg-white rounded-xl p-4 flex items-center gap-4 border border-gray-100 hover:border-sota-btn/30 hover:shadow-sm transition-all duration-200 cursor-pointer" data-audio-type="empowerment"><div class="w-14 h-14 rounded-xl overflow-hidden shrink-0"><img src="images/members/audio/motivational-3.jpg" alt="Motivational Session 3" class="w-full h-full object-cover"></div><div class="flex-1 min-w-0"><h3 class="text-[14px] font-semibold text-sota-dark truncate">Motivational Session 3</h3><p class="text-[12px] text-gray-400">Empowerment &middot; 10 min</p></div><div class="w-10 h-10 rounded-full bg-sota-btn/10 flex items-center justify-center shrink-0"><svg class="w-4 h-4 text-sota-btn ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+              </div>
+
+              <!-- Christian group -->
+              <h3 class="text-[12px] text-gray-400 uppercase tracking-[0.15em] mb-4 font-medium" data-audio-header="christian">Christian Empowerment</h3>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <div class="bg-white rounded-xl p-4 flex items-center gap-4 border border-gray-100 hover:border-sota-btn/30 hover:shadow-sm transition-all duration-200 cursor-pointer" data-audio-type="christian"><div class="w-14 h-14 rounded-xl overflow-hidden shrink-0"><img src="images/members/audio/presence-of-god.jpg" alt="In the Presence of God" class="w-full h-full object-cover"></div><div class="flex-1 min-w-0"><h3 class="text-[14px] font-semibold text-sota-dark truncate">In the Presence of God</h3><p class="text-[12px] text-gray-400">Christian &middot; 8 min</p></div><div class="w-10 h-10 rounded-full bg-sota-btn/10 flex items-center justify-center shrink-0"><svg class="w-4 h-4 text-sota-btn ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+                <div class="bg-white rounded-xl p-4 flex items-center gap-4 border border-gray-100 hover:border-sota-btn/30 hover:shadow-sm transition-all duration-200 cursor-pointer" data-audio-type="christian"><div class="w-14 h-14 rounded-xl overflow-hidden shrink-0"><img src="images/members/audio/letting-worry-go.jpg" alt="Letting the Worry Go with God" class="w-full h-full object-cover"></div><div class="flex-1 min-w-0"><h3 class="text-[14px] font-semibold text-sota-dark truncate">Letting the Worry Go with God</h3><p class="text-[12px] text-gray-400">Christian &middot; 10 min</p></div><div class="w-10 h-10 rounded-full bg-sota-btn/10 flex items-center justify-center shrink-0"><svg class="w-4 h-4 text-sota-btn ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+                <div class="bg-white rounded-xl p-4 flex items-center gap-4 border border-gray-100 hover:border-sota-btn/30 hover:shadow-sm transition-all duration-200 cursor-pointer" data-audio-type="christian"><div class="w-14 h-14 rounded-xl overflow-hidden shrink-0"><img src="images/members/audio/god-favors-me.jpg" alt="God Favors Me" class="w-full h-full object-cover"></div><div class="flex-1 min-w-0"><h3 class="text-[14px] font-semibold text-sota-dark truncate">God Favors Me</h3><p class="text-[12px] text-gray-400">Christian &middot; 7 min</p></div><div class="w-10 h-10 rounded-full bg-sota-btn/10 flex items-center justify-center shrink-0"><svg class="w-4 h-4 text-sota-btn ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+                <div class="bg-white rounded-xl p-4 flex items-center gap-4 border border-gray-100 hover:border-sota-btn/30 hover:shadow-sm transition-all duration-200 cursor-pointer" data-audio-type="christian"><div class="w-14 h-14 rounded-xl overflow-hidden shrink-0"><img src="images/members/audio/gods-love-letter.jpg" alt="Gods Love Letter to You" class="w-full h-full object-cover"></div><div class="flex-1 min-w-0"><h3 class="text-[14px] font-semibold text-sota-dark truncate">God's Love Letter to You</h3><p class="text-[12px] text-gray-400">Christian &middot; 9 min</p></div><div class="w-10 h-10 rounded-full bg-sota-btn/10 flex items-center justify-center shrink-0"><svg class="w-4 h-4 text-sota-btn ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+                <div class="bg-white rounded-xl p-4 flex items-center gap-4 border border-gray-100 hover:border-sota-btn/30 hover:shadow-sm transition-all duration-200 cursor-pointer" data-audio-type="christian"><div class="w-14 h-14 rounded-xl overflow-hidden shrink-0"><img src="images/members/audio/god-is-love.jpg" alt="God is Love" class="w-full h-full object-cover"></div><div class="flex-1 min-w-0"><h3 class="text-[14px] font-semibold text-sota-dark truncate">God is Love</h3><p class="text-[12px] text-gray-400">Christian &middot; 6 min</p></div><div class="w-10 h-10 rounded-full bg-sota-btn/10 flex items-center justify-center shrink-0"><svg class="w-4 h-4 text-sota-btn ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+                <div class="bg-white rounded-xl p-4 flex items-center gap-4 border border-gray-100 hover:border-sota-btn/30 hover:shadow-sm transition-all duration-200 cursor-pointer" data-audio-type="christian"><div class="w-14 h-14 rounded-xl overflow-hidden shrink-0"><img src="images/members/audio/faith-confidence-peace.jpg" alt="Faith Confidence Peace" class="w-full h-full object-cover"></div><div class="flex-1 min-w-0"><h3 class="text-[14px] font-semibold text-sota-dark truncate">Faith, Confidence, Peace</h3><p class="text-[12px] text-gray-400">Christian &middot; 11 min</p></div><div class="w-10 h-10 rounded-full bg-sota-btn/10 flex items-center justify-center shrink-0"><svg class="w-4 h-4 text-sota-btn ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+    </div><!-- /tab-content -->
+
+    <!-- CTA -->
+    <section class="bg-sota-bg py-12 px-6">
+      <div class="max-w-[600px] mx-auto text-center">
+        <h2 class="font-serif text-[24px] text-sota-dark mb-3">Questions about your program?</h2>
+        <p class="text-[14px] text-gray-500 mb-6">Your nutritionist is always a phone call away.</p>
+        <a href="book.html" class="inline-block bg-sota-btn text-white text-[15px] font-semibold px-10 py-4 rounded-full hover:bg-sota-btn-hover transition cursor-pointer">Book a Free Call</a>
+      </div>
+    </section>
+
+  </div><!-- /members-content -->
+
+  <!-- FOOTER -->
+  <footer class="bg-sota-dark border-t border-white/10 py-10 px-6">
+    <div class="max-w-[1000px] mx-auto flex items-start justify-between flex-wrap gap-8">
+      <div><div class="flex items-baseline" style="gap: 2px;"><span class="sota-logo text-[24px] text-white">SOTA</span><span class="text-[5px] text-white/40" style="letter-spacing: 0.1em; font-family: 'DM Sans', sans-serif; font-weight: 400;">WEIGHT LOSS</span></div><span class="sota-logo-sub text-[8px] text-white/40 block -mt-0.5">DIET AND NUTRITION</span><p class="text-[12px] text-white/40 mt-4 leading-relaxed max-w-[220px]">The #1 weight loss program in America for nutritionist client care satisfaction.</p></div>
+      <div class="text-[12px] text-white/50 space-y-2"><p class="text-white/70 font-medium mb-2">Program</p><p><a href="index.html#method" class="hover:text-white/80 transition">The SOTA Method</a></p><p><a href="index.html#coaching" class="hover:text-white/80 transition">Coaching</a></p><p><a href="index.html#results" class="hover:text-white/80 transition">Results</a></p><p><a href="science.html" class="hover:text-white/80 transition">The Science</a></p></div>
+      <div class="text-[12px] text-white/50 space-y-2"><p class="text-white/70 font-medium mb-2">Locations</p><p>Fort Worth, TX</p><p>Nationwide (Phone)</p><p><a href="locations.html" class="hover:text-white/80 transition">View Locations</a></p></div>
+      <div class="text-[12px] text-white/50 space-y-2"><p class="text-white/70 font-medium mb-2">Contact</p><p><a href="tel:8668007682" class="hover:text-white/80 transition">866-800-7682</a></p><p>sotaweightloss.com</p></div>
+      <div class="text-[12px] text-white/50 space-y-2">
+        <p class="text-white/70 font-medium mb-2">Follow Us</p>
+        <p><a href="https://www.facebook.com/share/1Dfuzw7dTo/?mibextid=wwXIfr" target="_blank" rel="noopener" class="inline-flex items-center gap-2 hover:text-white/80 transition"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>Facebook</a></p>
+        <p><a href="https://www.instagram.com/sotaweightloss" target="_blank" rel="noopener" class="inline-flex items-center gap-2 hover:text-white/80 transition"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>Instagram</a></p>
+      </div>
+    </div>
+    <div class="max-w-[1000px] mx-auto mt-8 pt-4 border-t border-white/10 flex flex-wrap items-center justify-between gap-4">
+      <p class="text-[11px] text-white/30">&copy; 2026 SOTA Diet and Nutrition. All rights reserved.</p>
+      <p class="text-[10px] text-white/20 max-w-[400px]">Weight loss results may vary. Consult your physician before starting any weight loss program.</p>
+    </div>
+  </footer>
+
+  <script src="recipe-data.js"></script>
+  <script src="maintenance-recipe-data.js"></script>
+  <!-- SCRIPTS -->
+  <script>
+  // 1. Mobile Menu
+  (function(){const b=document.getElementById('mobile-menu-btn'),m=document.getElementById('mobile-menu');b.addEventListener('click',()=>m.classList.toggle('hidden'));m.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>m.classList.add('hidden')))})();
+
+  // 2. Layer 1 Password Gate
+  (function(){const PW='ilovesota',KEY='sota-members-auth',form=document.getElementById('password-form'),input=document.getElementById('password-input'),err=document.getElementById('password-error'),gate=document.getElementById('password-gate'),content=document.getElementById('members-content');if(sessionStorage.getItem(KEY)==='true'){gate.classList.add('hidden');content.classList.remove('hidden')}form.addEventListener('submit',e=>{e.preventDefault();if(input.value.trim().toLowerCase()===PW){sessionStorage.setItem(KEY,'true');gate.classList.add('hidden');content.classList.remove('hidden');err.classList.add('hidden')}else{err.classList.remove('hidden');input.value='';input.focus()}})})();
+
+  // 3. Layer 2 Maintenance Gate
+  (function(){const PW='sotasuccess',KEY='sota-maintenance-auth',form=document.getElementById('maintenance-password-form'),input=document.getElementById('maintenance-password-input'),err=document.getElementById('maintenance-password-error'),gate=document.getElementById('maintenance-gate'),content=document.getElementById('maintenance-content');if(sessionStorage.getItem(KEY)==='true'){gate.classList.add('hidden');content.classList.remove('hidden')}form.addEventListener('submit',e=>{e.preventDefault();if(input.value.trim().toLowerCase()===PW){sessionStorage.setItem(KEY,'true');gate.classList.add('hidden');content.classList.remove('hidden');err.classList.add('hidden')}else{err.classList.remove('hidden');input.value='';input.focus()}})})();
+
+  // 4. Tab System
+  (function(){const tabs=document.querySelectorAll('[data-tab-btn]'),panels=document.querySelectorAll('[data-tab-panel]');function switchTab(id){tabs.forEach(t=>{const a=t.dataset.tabBtn===id;t.classList.toggle('text-sota-btn',a);t.classList.toggle('border-sota-btn',a);t.classList.toggle('font-medium',a);t.classList.toggle('text-gray-500',!a);t.classList.toggle('border-transparent',!a)});panels.forEach(p=>p.classList.toggle('hidden',p.dataset.tabPanel!==id))}tabs.forEach(t=>t.addEventListener('click',()=>switchTab(t.dataset.tabBtn)));document.querySelectorAll('[data-switch-tab]').forEach(el=>el.addEventListener('click',()=>switchTab(el.dataset.switchTab)))})();
+
+  // 5. Sub-tab System
+  (function(){document.querySelectorAll('[data-subtab-group]').forEach(group=>{if(group.querySelector('[data-subtab-btn]')){const name=group.dataset.subtabGroup,btns=group.querySelectorAll('[data-subtab-btn]'),panels=document.querySelectorAll('[data-subtab-panel][data-subtab-group="'+name+'"]');btns.forEach(btn=>btn.addEventListener('click',()=>{const t=btn.dataset.subtabBtn;btns.forEach(b=>{b.classList.toggle('bg-sota-dark',b.dataset.subtabBtn===t);b.classList.toggle('text-white',b.dataset.subtabBtn===t);b.classList.toggle('bg-sota-bg',b.dataset.subtabBtn!==t);b.classList.toggle('text-gray-600',b.dataset.subtabBtn!==t)});panels.forEach(p=>p.classList.toggle('hidden',p.dataset.subtabPanel!==t))}))}})})();
+
+  // 6. Generate Weekly Recipe Cards from SOTA_RECIPES data
+  (function(){
+    const CAT_LABELS={chicken:'Chicken',beef:'Beef',seafood:'Seafood',pork:'Pork & Lamb',veggies:'Veggies & Sides',sauces:'Sauces & Dips',breakfast:'Breakfast'};
+    const grid=document.getElementById('weekly-recipe-grid');
+    if(!grid||!window.SOTA_RECIPES)return;
+    window.SOTA_RECIPES.forEach(r=>{
+      const catLabel=CAT_LABELS[r.category]||r.category;
+      const tagsStr=r.tags.join(',');
+      const card=document.createElement('a');
+      card.href='recipe.html?id='+r.id;
+      card.className='bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-200 block';
+      card.dataset.recipeCard='';
+      card.dataset.title=r.title;
+      card.dataset.categories=r.category;
+      card.dataset.tags=tagsStr;
+      card.innerHTML=`<div class="relative"><img src="${r.img}" alt="${r.title}" class="w-full h-44 object-cover" loading="lazy"><div class="absolute top-3 left-3 flex gap-1.5"><span class="bg-white/90 backdrop-blur-sm text-[10px] font-medium text-gray-700 px-2.5 py-1 rounded-full">${catLabel}</span></div></div><div class="p-5"><p class="text-[11px] text-sota-btn font-semibold uppercase tracking-wider mb-1.5">${catLabel}</p><h3 class="text-[15px] font-semibold text-sota-dark leading-snug">${r.title}</h3></div>`;
+      grid.appendChild(card);
+    });
+  })();
+
+  // 6b. Generate Maintenance Recipe Cards from SOTA_MAINTENANCE_RECIPES data
+  (function(){
+    const CAT_LABELS={chicken:'Chicken',beef:'Beef',seafood:'Seafood',pork:'Pork',veggies:'Veggies & Sides',sauces:'Sauces & Dips',breakfast:'Breakfast',snack:'Snacks & Treats'};
+    const grid=document.getElementById('maintenance-recipe-grid');
+    if(!grid||!window.SOTA_MAINTENANCE_RECIPES)return;
+    window.SOTA_MAINTENANCE_RECIPES.forEach(r=>{
+      const catLabel=CAT_LABELS[r.category]||r.category;
+      const tagsStr=r.tags.join(',');
+      const card=document.createElement('a');
+      card.href='maintenance-recipe.html?id='+r.id;
+      card.className='bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-200 block';
+      card.dataset.recipeCard='';
+      card.dataset.title=r.title;
+      card.dataset.categories=r.category;
+      card.dataset.tags=tagsStr;
+      card.innerHTML=`<div class="relative"><img src="${r.img}" alt="${r.title}" class="w-full h-44 object-cover" loading="lazy"><div class="absolute top-3 left-3 flex gap-1.5"><span class="bg-white/90 backdrop-blur-sm text-[10px] font-medium text-gray-700 px-2.5 py-1 rounded-full">${catLabel}</span></div></div><div class="p-5"><p class="text-[11px] text-sota-btn font-semibold uppercase tracking-wider mb-1.5">${catLabel}</p><h3 class="text-[15px] font-semibold text-sota-dark leading-snug">${r.title}</h3></div>`;
+      grid.appendChild(card);
+    });
+  })();
+
+  // 7. Recipe Filtering + Search
+  (function(){['weekly','maintenance'].forEach(section=>{const container=document.getElementById(section+'-recipe-grid');if(!container)return;const cards=container.querySelectorAll('[data-recipe-card]'),searchInput=document.getElementById(section+'-recipe-search'),catChips=document.querySelectorAll('[data-filter-group="'+section+'-category"] [data-filter-chip]'),tagChips=document.querySelectorAll('[data-filter-group="'+section+'-tags"] [data-filter-chip]');let activeCat='all',activeTags=new Set();function filter(){const q=searchInput?searchInput.value.toLowerCase().trim():'';let visible=0;cards.forEach(c=>{const title=c.dataset.title.toLowerCase(),cats=c.dataset.categories.split(','),tags=c.dataset.tags.split(',');const mS=!q||title.includes(q),mC=activeCat==='all'||cats.includes(activeCat),mT=activeTags.size===0||[...activeTags].some(t=>tags.includes(t));const show=mS&&mC&&mT;c.classList.toggle('hidden',!show);if(show)visible++});const nr=document.getElementById(section+'-no-results');if(nr)nr.classList.toggle('hidden',visible>0)}catChips.forEach(chip=>chip.addEventListener('click',()=>{activeCat=chip.dataset.filterChip;catChips.forEach(c=>{c.classList.toggle('bg-sota-dark',c.dataset.filterChip===activeCat);c.classList.toggle('text-white',c.dataset.filterChip===activeCat);c.classList.toggle('bg-sota-bg',c.dataset.filterChip!==activeCat);c.classList.toggle('text-gray-600',c.dataset.filterChip!==activeCat)});filter()}));tagChips.forEach(chip=>chip.addEventListener('click',()=>{const t=chip.dataset.filterChip;if(activeTags.has(t)){activeTags.delete(t);chip.classList.remove('bg-sota-btn','text-white');chip.classList.add('bg-sota-bg','text-gray-500')}else{activeTags.add(t);chip.classList.add('bg-sota-btn','text-white');chip.classList.remove('bg-sota-bg','text-gray-500')}filter()}));if(searchInput)searchInput.addEventListener('input',filter)})})();
+
+  // 8. Mindset Audio Filtering
+  (function(){const group=document.querySelector('[data-subtab-group="mindset"]');if(!group)return;const btns=group.querySelectorAll('[data-subtab-btn]');const audioCards=document.querySelectorAll('[data-audio-type]');const headers=document.querySelectorAll('[data-audio-header]');btns.forEach(btn=>btn.addEventListener('click',()=>{const t=btn.dataset.subtabBtn;btns.forEach(b=>{b.classList.toggle('bg-sota-dark',b.dataset.subtabBtn===t);b.classList.toggle('text-white',b.dataset.subtabBtn===t);b.classList.toggle('bg-sota-bg',b.dataset.subtabBtn!==t);b.classList.toggle('text-gray-600',b.dataset.subtabBtn!==t)});if(t==='all-audio'){audioCards.forEach(c=>c.classList.remove('hidden'));headers.forEach(h=>h.classList.remove('hidden'))}else{audioCards.forEach(c=>c.classList.toggle('hidden',c.dataset.audioType!==t));headers.forEach(h=>h.classList.toggle('hidden',h.dataset.audioHeader!==t))}}))})();
+  </script>
+</body>
+</html>
